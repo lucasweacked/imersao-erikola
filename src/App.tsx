@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { KeyboardEvent } from "react";
 
 import "./App.css";
 
@@ -17,6 +16,23 @@ export default function App() {
           id="task"
           value={text}
           onChange={(event) => setText(event.target.value)}
+          placeholder="Insira algo aqui"
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              if (text.trim() === "") {
+                setError("Por favor, preencher alguma coisa.");
+                return;
+              } else {
+                setError("");
+              }
+
+              setTasks((arrayAntigo) => [
+                ...arrayAntigo,
+                { text: text, done: false },
+              ]);
+              setText("");
+            }
+          }}
         />
         <button
           onClick={() => {
