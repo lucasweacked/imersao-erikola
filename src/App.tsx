@@ -7,6 +7,18 @@ export default function App() {
   const [tasks, setTasks] = useState<Array<Omit<TaskProps, "setDone">>>([]);
   const [error, setError] = useState("");
 
+  function Validacao() {
+    if (text.trim() === "") {
+      setError("Por favor, inserir algo.");
+      return;
+    } else {
+      setError("");
+    }
+
+    setTasks((arrayAntigo) => [...arrayAntigo, { text: text, done: false }]);
+    setText("");
+  }
+
   return (
     <>
       <div>
@@ -19,35 +31,13 @@ export default function App() {
           placeholder="Insira algo aqui"
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              if (text.trim() === "") {
-                setError("Por favor, preencher alguma coisa.");
-                return;
-              } else {
-                setError("");
-              }
-
-              setTasks((arrayAntigo) => [
-                ...arrayAntigo,
-                { text: text, done: false },
-              ]);
-              setText("");
+              Validacao();
             }
           }}
         />
         <button
           onClick={() => {
-            if (text.trim() === "") {
-              setError("Por favor, preencher alguma coisa.");
-              return;
-            } else {
-              setError("");
-            }
-
-            setTasks((arrayAntigo) => [
-              ...arrayAntigo,
-              { text: text, done: false },
-            ]);
-            setText("");
+            Validacao();
           }}
         >
           Salvar
