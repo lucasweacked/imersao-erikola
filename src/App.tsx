@@ -7,7 +7,7 @@ export default function App() {
   const [tasks, setTasks] = useState<Array<Omit<TaskProps, "setDone">>>([]);
   const [error, setError] = useState("");
 
-  function Validacao() {
+  function validacao() {
     if (text.trim() === "") {
       setError("Por favor, inserir algo.");
       return;
@@ -21,7 +21,11 @@ export default function App() {
 
   return (
     <>
-      <div>
+      <h1>
+        <span>Imersão Erikola de React</span>
+      </h1>
+
+      <div className="input-texto">
         <input
           type="text"
           name="tarefa"
@@ -31,13 +35,13 @@ export default function App() {
           placeholder="Insira algo aqui"
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              Validacao();
+              validacao();
             }
           }}
         />
         <button
           onClick={() => {
-            Validacao();
+            validacao();
           }}
         >
           Salvar
